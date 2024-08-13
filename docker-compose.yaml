@@ -1,9 +1,13 @@
 services:
   frontend:
+    depends_on:
+      - backend
     image: "frontend:latest"
     ports:
      - 8000:80
   backend:
+    depends_on:
+      - mysql
     image: "backend:latest"
     ports:
       - 9000:9000
