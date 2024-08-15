@@ -33,11 +33,13 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./certbot/www/:/var/www/certbot/:ro
+      - ./certbot/conf/live/skypedal.moolman.dev/fullchain.pem:/etc/nginx/certs/fullchain.pem
+      - ./certbot/conf/live/skypedal.moolman.dev/privkey.pem:/etc/nginx/certs/privkey.pem
     depends_on:
       - frontend
       - backend
-      # - certbot
   certbot:
+    profiles: ["certbot"]
     image: certbot/certbot:latest
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
